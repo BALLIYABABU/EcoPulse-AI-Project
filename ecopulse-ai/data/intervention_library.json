@@ -1,0 +1,122 @@
+[
+  {
+    "id": "IND-001",
+    "name": "Reduce industrial output by 15%",
+    "applicable_when": ["industrial_emissions > 0.6"],
+    "aqi_reduction_pct": 22,
+    "cost_inr_cr": 2.1,
+    "implementation_days": 3,
+    "confidence": 0.89,
+    "co2_reduction_tonnes": 340
+  },
+  {
+    "id": "TRF-001", 
+    "name": "Restrict heavy vehicles 6AM–10PM",
+    "applicable_when": ["traffic_density > 0.7"],
+    "aqi_reduction_pct": 18,
+    "cost_inr_cr": 0.4,
+    "implementation_days": 1,
+    "confidence": 0.84,
+    "co2_reduction_tonnes": 180
+  },
+  {
+    "id": "GRN-001",
+    "name": "Deploy temporary green corridors",
+    "applicable_when": ["vegetation_index < 0.2"],
+    "aqi_reduction_pct": 8,
+    "cost_inr_cr": 1.8,
+    "implementation_days": 14,
+    "confidence": 0.71,
+    "co2_reduction_tonnes": 90
+  },
+  {
+    "id": "TRF-002",
+    "name": "Increase public transport frequency",
+    "applicable_when": ["traffic_density > 0.5"],
+    "aqi_reduction_pct": 13,
+    "cost_inr_cr": 0.9,
+    "implementation_days": 2,
+    "confidence": 0.78,
+    "co2_reduction_tonnes": 120
+  },
+  {
+    "id": "IND-002",
+    "name": "Deploy smog towers in Peenya sector",
+    "applicable_when": ["industrial_emissions > 0.5"],
+    "aqi_reduction_pct": 10,
+    "cost_inr_cr": 3.5,
+    "implementation_days": 30,
+    "confidence": 0.75,
+    "co2_reduction_tonnes": 20
+  },
+  {
+    "id": "WST-001",
+    "name": "Enforce construction site dust suppression",
+    "applicable_when": ["pm10 > 150"],
+    "aqi_reduction_pct": 12,
+    "cost_inr_cr": 0.2,
+    "implementation_days": 2,
+    "confidence": 0.80,
+    "co2_reduction_tonnes": 15
+  },
+  {
+    "id": "TRF-003",
+    "name": "Implement odd-even vehicle rationing",
+    "applicable_when": ["traffic_density > 0.8"],
+    "aqi_reduction_pct": 15,
+    "cost_inr_cr": 0.5,
+    "implementation_days": 1,
+    "confidence": 0.82,
+    "co2_reduction_tonnes": 210
+  },
+  {
+    "id": "MET-001",
+    "name": "Seed clouds for artificial rain",
+    "applicable_when": ["humidity > 0.6", "wind_speed < 2.0"],
+    "aqi_reduction_pct": 25,
+    "cost_inr_cr": 5.0,
+    "implementation_days": 2,
+    "confidence": 0.60,
+    "co2_reduction_tonnes": 0
+  },
+  {
+    "id": "WST-002",
+    "name": "Enforce ban on solid waste burning",
+    "applicable_when": ["pm25 > 100"],
+    "aqi_reduction_pct": 9,
+    "cost_inr_cr": 0.1,
+    "implementation_days": 1,
+    "confidence": 0.85,
+    "co2_reduction_tonnes": 85
+  },
+  {
+    "id": "TRF-004",
+    "name": "Mandatory WFH for tech parks",
+    "applicable_when": ["traffic_density > 0.6"],
+    "aqi_reduction_pct": 14,
+    "cost_inr_cr": 0.1,
+    "implementation_days": 1,
+    "confidence": 0.90,
+    "co2_reduction_tonnes": 250
+  },
+  {
+    "id": "TRF-005",
+    "name": "Water spraying on arterial roads",
+    "applicable_when": ["pm10 > 100"],
+    "aqi_reduction_pct": 7,
+    "cost_inr_cr": 0.3,
+    "implementation_days": 1,
+    "confidence": 0.88,
+    "co2_reduction_tonnes": 10
+  },
+  {
+    "id": "IND-003",
+    "name": "Shutdown coal captive power plants",
+    "applicable_when": ["industrial_emissions > 0.4"],
+    "aqi_reduction_pct": 20,
+    "cost_inr_cr": 4.2,
+    "implementation_days": 2,
+    "confidence": 0.92,
+    "co2_reduction_tonnes": 450
+  }
+]

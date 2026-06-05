@@ -1,0 +1,294 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-001",
+        "name": "Peenya Ind Area Phase 1",
+        "aqi": 220,
+        "pm25": 142,
+        "pm10": 268,
+        "no2": 64,
+        "co": 1.8,
+        "type": "Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.520, 13.030]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-002",
+        "name": "Peenya Sector 4",
+        "aqi": 235,
+        "pm25": 155,
+        "pm10": 290,
+        "no2": 72,
+        "co": 2.1,
+        "type": "Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.530, 13.020]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-003",
+        "name": "Peenya North Station",
+        "aqi": 215,
+        "pm25": 138,
+        "pm10": 255,
+        "no2": 59,
+        "co": 1.6,
+        "type": "Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.510, 13.040]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-004",
+        "name": "Yeshwanthpur Metro Hub",
+        "aqi": 180,
+        "pm25": 98,
+        "pm10": 195,
+        "no2": 45,
+        "co": 1.2,
+        "type": "Traffic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.540, 13.010]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-005",
+        "name": "Whitefield Export Zone",
+        "aqi": 195,
+        "pm25": 112,
+        "pm10": 210,
+        "no2": 52,
+        "co": 1.4,
+        "type": "Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.740, 12.970]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-006",
+        "name": "Whitefield ITPL Phase 2",
+        "aqi": 210,
+        "pm25": 128,
+        "pm10": 230,
+        "no2": 58,
+        "co": 1.7,
+        "type": "Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.750, 12.960]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-007",
+        "name": "Whitefield Kadugodi Station",
+        "aqi": 225,
+        "pm25": 146,
+        "pm10": 250,
+        "no2": 66,
+        "co": 1.9,
+        "type": "Industrial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.730, 12.980]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-008",
+        "name": "Majestic Bus Terminus",
+        "aqi": 165,
+        "pm25": 82,
+        "pm10": 178,
+        "no2": 54,
+        "co": 2.2,
+        "type": "Traffic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.570, 12.970]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-009",
+        "name": "Corporation Circle",
+        "aqi": 155,
+        "pm25": 78,
+        "pm10": 160,
+        "no2": 48,
+        "co": 1.9,
+        "type": "Traffic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.590, 12.960]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-010",
+        "name": "Jayanagar 4th Block",
+        "aqi": 95,
+        "pm25": 38,
+        "pm10": 85,
+        "no2": 22,
+        "co": 0.6,
+        "type": "Residential"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.580, 12.930]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-011",
+        "name": "Koramangala 80ft Road",
+        "aqi": 110,
+        "pm25": 46,
+        "pm10": 98,
+        "no2": 28,
+        "co": 0.8,
+        "type": "Residential"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.620, 12.930]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-012",
+        "name": "Indiranagar 100ft Road",
+        "aqi": 120,
+        "pm25": 52,
+        "pm10": 115,
+        "no2": 32,
+        "co": 0.9,
+        "type": "Commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.640, 12.960]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-013",
+        "name": "Hebbal Flyover Junction",
+        "aqi": 140,
+        "pm25": 68,
+        "pm10": 138,
+        "no2": 41,
+        "co": 1.5,
+        "type": "Traffic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.590, 13.030]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-014",
+        "name": "Electronic City Phase 1",
+        "aqi": 135,
+        "pm25": 62,
+        "pm10": 130,
+        "no2": 38,
+        "co": 1.1,
+        "type": "Commercial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.660, 12.850]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-015",
+        "name": "Bellandur Outer Ring Road",
+        "aqi": 175,
+        "pm25": 95,
+        "pm10": 190,
+        "no2": 49,
+        "co": 1.6,
+        "type": "Traffic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.670, 12.930]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-016",
+        "name": "Silk Board Junction (Sensor Fault)",
+        "aqi": 999,
+        "pm25": 850,
+        "pm10": 1800,
+        "no2": 450,
+        "co": 25.0,
+        "type": "Traffic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.620, 12.910]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "ST-017",
+        "name": "ORR Station 4 (Flatline Fault)",
+        "aqi": 0,
+        "pm25": 0,
+        "pm10": 0,
+        "no2": 0,
+        "co": 0.0,
+        "type": "Traffic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.690, 12.950]
+      }
+    }
+  ]
+}

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoPulse AI — Predict. Explain. Prevent.</title>
+  <meta name="description" content="Production-grade AI command center for environmental monitoring, explainable forecasting, and decision interventions across 5 Indian cities.">
+  <meta name="keywords" content="environmental AI, AQI prediction, XGBoost, SHAP, Digital Twin, India pollution, SmartEarth 2026">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========================================== -->
+  <!-- 1. LANDING PAGE HERO                       -->
+  <!-- ========================================== -->
+  <div id="landing-page" class="landing-container">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <header class="landing-header">
+      <div class="logo">
+        <i data-lucide="activity" class="pulse-icon"></i>
+        <span>EcoPulse <span>AI</span></span>
+      </div>
+      <div class="team-tag">Team Neural Ninjas &bull; SmartEarth 2026</div>
+    </header>
+
+    <main class="landing-main">
+      <div class="hero-content">
+        <div class="hero-badge">Environmental Data Analytics Track</div>
+        <h1 class="hero-title">Predict. Explain. Prevent.</h1>
+        <p class="hero-subtitle">The first active Environmental Command Center. We don't just monitor current crises — we predict future outcomes, explain root causes, and simulate critical interventions.</p>
+
+        <div class="ehi-landing-animation">
+          <div class="ehi-circle-pulse">
+            <span class="ehi-val-anim">23</span>
+            <span class="ehi-lbl-anim">EHI Score</span>
+          </div>
+          <div class="ehi-desc-anim">
+            <h3>Bengaluru Corridor</h3>
+            <p>EHI: <span class="danger-text">23 (Critical)</span> &bull; Forecast: <span class="danger-text">AQI 287 in T+7 Days</span></p>
+          </div>
+        </div>
+
+        <div class="hero-stats-row">
+          <div class="hero-stat">
+            <span class="hs-val">5</span>
+            <span class="hs-lbl">Cities Monitored</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hs-val">7-Day</span>
+            <span class="hs-lbl">Forecast Horizon</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hs-val">XGBoost</span>
+            <span class="hs-lbl">Prediction Engine</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hs-val">SHAP</span>
+            <span class="hs-lbl">Explainability</span>
+          </div>
+        </div>
+
+        <button id="launch-btn" class="cta-button">
+          <span>Launch Command Center</span>
+          <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
+    </main>
+
+    <!-- Real-time AQI Ticker -->
+    <div class="ticker-wrap">
+      <div class="ticker-title">LIVE CITY INDEX</div>
+      <div class="ticker">
+        <div class="ticker__item">Bengaluru Industrial Corridor: 168 (Unhealthy) <span class="dot red">●</span></div>
+        <div class="ticker__item">Delhi Anand Vihar: 342 (Severe) <span class="dot deep-red">●</span></div>
+        <div class="ticker__item">Mumbai Dharavi-Chembur: 145 (Moderate) <span class="dot yellow">●</span></div>
+        <div class="ticker__item">Chennai Manali-Ennore: 82 (Satisfactory) <span class="dot green">●</span></div>
+        <div class="ticker__item">Hyderabad Patancheru: 124 (Moderate) <span class="dot yellow">●</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. CITY SELECTOR SCREEN                    -->
+  <!-- ========================================== -->
+  <div id="city-selector" class="city-selector-screen hidden">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <header class="selector-header">
+      <div class="logo">
+        <i data-lucide="activity" class="pulse-icon"></i>
+        <span>EcoPulse <span>AI</span></span>
+      </div>
+      <div class="selector-title-group">
+        <h2>Select City Target</h2>
+        <p>Choose a city to open its Environmental Command Center</p>
+      </div>
+    </header>
+
+    <div class="city-cards-grid" id="city-cards-container">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="selector-footer">
+      <button class="back-btn" id="back-to-landing-btn">
+        <i data-lucide="arrow-left"></i> Back to Overview
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. COMMAND CENTER DASHBOARD                -->
+  <!-- ========================================== -->
+  <div id="command-center" class="dashboard-container hidden">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <i data-lucide="activity" class="logo-icon"></i>
+        <h2>EcoPulse AI</h2>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#overview" class="nav-item active" data-tab="overview">
+          <i data-lucide="layout-dashboard"></i> <span>Overview</span>
+        </a>
+        <a href="#geospatial" class="nav-item" data-tab="geospatial">
+          <i data-lucide="map"></i> <span>Geospatial Intelligence</span>
+        </a>
+        <a href="#hotspots" class="nav-item" data-tab="hotspots">
+          <i data-lucide="flame"></i> <span>Hotspot Clustering</span>
+        </a>
+        <a href="#interventions" class="nav-item" data-tab="interventions">
+          <i data-lucide="shield-alert"></i> <span>Intervention Library</span>
+        </a>
+        <a href="#twin" class="nav-item" data-tab="twin">
+          <i data-lucide="cpu"></i> <span>Scenario Simulation</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="change-city-btn" id="change-city-btn">
+          <i data-lucide="map-pin"></i> <span id="sidebar-city-name">Bengaluru</span>
+          <i data-lucide="chevron-down" class="chevron"></i>
+        </button>
+        <div class="mode-indicator">
+          <span class="pulse-dot green" id="status-dot">●</span>
+          <span id="mode-text">DEMO MODE</span>
+        </div>
+        <div class="system-meta">
+          <p>Models: XGBoost + SHAP + DBSCAN</p>
+          <p>Version: v2.0.0-SmartEarth26</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Window -->
+    <div class="main-window">
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <div class="city-breadcrumb">
+            <i data-lucide="map-pin"></i>
+            <span id="topbar-city-name">Bengaluru Industrial Corridor</span>
+            <span class="breadcrumb-sep">›</span>
+            <span id="topbar-zone-name" class="text-gray">Peenya–Whitefield Industrial Corridor</span>
+          </div>
+        </div>
+
+        <div class="top-bar-right">
+          <div class="data-source-badge" id="data-source">
+            <span class="dot-small green"></span> Data: Bundled Demo
+          </div>
+          <button id="copilot-toggle-btn" class="copilot-btn">
+            <i data-lucide="bot"></i>
+            <span>AI Copilot</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <main class="dashboard-content" id="dashboard-content">
+
+        <!-- ALERT BANNER -->
+        <div class="alert-banner" id="crisis-alert">
+          <div class="alert-icon-wrap"><i data-lucide="alert-triangle" class="warning-pulse"></i></div>
+          <div class="alert-details">
+            <h3>Predicted Environmental Crisis Event</h3>
+            <p id="crisis-message-text">XGBoost projects AQI to hit <span class="danger-text bold">287 (Hazardous)</span> within <span class="bold">7 days</span>. Exceedance Probability: <span class="danger-text bold">91%</span>.</p>
+          </div>
+          <div class="alert-action">
+            <button class="alert-btn scroll-to-interventions">Review Interventions</button>
+          </div>
+        </div>
+
+        <!-- KPI ROW -->
+        <section class="kpi-grid">
+          <!-- EHI Gauge -->
+          <div class="glass-card kpi-card ehi-card">
+            <div class="card-header-small">
+              <h4>ENVIRONMENTAL HEALTH INDEX</h4>
+              <i data-lucide="heart-pulse" class="card-icon text-cyan"></i>
+            </div>
+            <div class="ehi-score-body">
+              <div class="ehi-circular-gauge">
+                <svg viewBox="0 0 100 100" class="circular-svg">
+                  <circle cx="50" cy="50" r="40" class="gauge-bg"></circle>
+                  <circle cx="50" cy="50" r="40" class="gauge-fill critical" id="ehi-circle-fill" stroke-dasharray="251.2" stroke-dashoffset="193.4"></circle>
+                </svg>
+                <div class="gauge-text">
+                  <span class="gauge-val" id="ehi-value">23</span>
+                  <span class="gauge-lbl">/100</span>
+                </div>
+              </div>
+              <div class="ehi-meta">
+                <span class="badge badge-danger" id="ehi-band">CRITICAL</span>
+                <p class="meta-desc">City credit score. Immediate action required.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Current AQI Gauge -->
+          <div class="glass-card kpi-card">
+            <div class="card-header-small">
+              <h4>CURRENT AQI (T+0)</h4>
+              <i data-lucide="wind" class="card-icon text-amber"></i>
+            </div>
+            <div class="aqi-body">
+              <div class="aqi-needle-gauge">
+                <div class="needle-pivot"></div>
+                <div class="needle" id="aqi-needle" style="transform: rotate(120deg);"></div>
+                <div class="gauge-labels">
+                  <span>0</span><span>100</span><span>200</span><span>300</span><span>500</span>
+                </div>
+              </div>
+              <div class="aqi-meta">
+                <span class="aqi-value-text" id="current-aqi">168</span>
+                <span class="badge badge-warning" id="aqi-status">UNHEALTHY</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Crisis Timeline -->
+          <div class="glass-card kpi-card">
+            <div class="card-header-small">
+              <h4>CRISIS TIMELINE</h4>
+              <i data-lucide="clock" class="card-icon text-red"></i>
+            </div>
+            <div class="countdown-body">
+              <div class="countdown-timer">
+                <span class="time-num" id="crisis-days">07</span><span class="time-lbl">Days</span>
+                <span class="time-sep">:</span>
+                <span class="time-num">00</span><span class="time-lbl">Hrs</span>
+              </div>
+              <p class="timeline-status text-red"><i data-lucide="shield-alert"></i> <span id="crisis-timeline-label">Hazardous threshold exceedance projected.</span></p>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill danger" id="crisis-progress-bar" style="width: 85%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sensor Integrity -->
+          <div class="glass-card kpi-card">
+            <div class="card-header-small">
+              <h4>SENSOR &amp; HOTSPOT INTEGRITY</h4>
+              <i data-lucide="check-square" class="card-icon text-emerald"></i>
+            </div>
+            <div class="integrity-body">
+              <div class="metric-row">
+                <div class="metric-col">
+                  <span class="metric-large-val text-red" id="active-hotspots">2</span>
+                  <span class="metric-sub-lbl">Hotspot Clusters</span>
+                </div>
+                <div class="metric-col border-left">
+                  <span class="metric-large-val text-amber" id="sensor-anomalies">2</span>
+                  <span class="metric-sub-lbl">Anomalies Flagged</span>
+                </div>
+              </div>
+              <div class="data-integrity-badge">
+                <i data-lucide="shield-check"></i> Data validated by Isolation Forest
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- POLLUTANT PILLS ROW -->
+        <section class="pollutant-pills-row" id="pollutant-pills">
+          <div class="pill-item"><span class="pill-lbl">PM2.5</span><span class="pill-val text-red" id="pill-pm25">89.4</span><span class="pill-unit">μg/m³</span></div>
+          <div class="pill-item"><span class="pill-lbl">PM10</span><span class="pill-val text-amber" id="pill-pm10">142.1</span><span class="pill-unit">μg/m³</span></div>
+          <div class="pill-item"><span class="pill-lbl">NO₂</span><span class="pill-val text-amber" id="pill-no2">67.3</span><span class="pill-unit">μg/m³</span></div>
+          <div class="pill-item"><span class="pill-lbl">SO₂</span><span class="pill-val text-cyan" id="pill-so2">34.1</span><span class="pill-unit">μg/m³</span></div>
+          <div class="pill-item"><span class="pill-lbl">CO</span><span class="pill-val text-cyan" id="pill-co">1.8</span><span class="pill-unit">ppm</span></div>
+          <div class="pill-item"><span class="pill-lbl">O₃</span><span class="pill-val text-emerald" id="pill-o3">44.2</span><span class="pill-unit">μg/m³</span></div>
+          <div class="pill-item"><span class="pill-lbl">Temp</span><span class="pill-val text-amber" id="pill-temp">28.5</span><span class="pill-unit">°C</span></div>
+          <div class="pill-item"><span class="pill-lbl">Wind</span><span class="pill-val text-cyan" id="pill-wind">1.2</span><span class="pill-unit">m/s</span></div>
+          <div class="pill-item"><span class="pill-lbl">Humidity</span><span class="pill-val text-cyan" id="pill-humidity">55</span><span class="pill-unit">%</span></div>
+        </section>
+
+        <!-- GEOSPATIAL + FORECAST ROW -->
+        <section class="dashboard-grid-two">
+          <!-- Geospatial Map -->
+          <div class="glass-card map-card">
+            <div class="card-header">
+              <div class="header-left">
+                <h3>Geospatial Intelligence Map</h3>
+                <span class="badge badge-planned">Sentinel-2 SegFormer Planned</span>
+              </div>
+              <div class="map-controls">
+                <button class="map-btn active" id="btn-toggle-hotspots">Hotspots</button>
+                <button class="map-btn" id="btn-toggle-ndvi">NDVI Diff</button>
+                <button class="map-btn" id="btn-toggle-anomalies">Anomalies</button>
+              </div>
+            </div>
+            <div class="map-wrapper">
+              <div id="map"></div>
+              <div class="ndvi-selector hidden" id="ndvi-selector-panel">
+                <h4>Preloaded NDVI Layers (Before/After)</h4>
+                <div class="ndvi-zone-item active" data-zone="ZONE-A">
+                  <span class="color-indicator red"></span>
+                  <div class="zone-details">
+                    <h5>Zone A: Forest/Agricultural Loss</h5>
+                    <p id="ndvi-zone-a-desc">NDVI: 0.68 → 0.42 (-38.2%)</p>
+                  </div>
+                </div>
+                <div class="ndvi-zone-item" data-zone="ZONE-B">
+                  <span class="color-indicator orange"></span>
+                  <div class="zone-details">
+                    <h5>Zone B: Waterbody Shrinkage</h5>
+                    <p id="ndvi-zone-b-desc">NDVI: 0.35 → 0.12 (-65.7%)</p>
+                  </div>
+                </div>
+                <div class="ndvi-zone-item" data-zone="ZONE-C">
+                  <span class="color-indicator cyan"></span>
+                  <div class="zone-details">
+                    <h5>Zone C: Urban Expansion</h5>
+                    <p id="ndvi-zone-c-desc">NDVI: 0.45 → 0.18 (-60.0%)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer-small text-gray">
+              <i data-lucide="info"></i> Precomputed Landsat-8 NDVI overlay. Green indicates vegetation retention; red indicates critical loss.
+            </div>
+          </div>
+
+          <!-- Forecast Chart -->
+          <div class="glass-card chart-card">
+            <div class="card-header">
+              <div class="header-left">
+                <h3>7-Day Risk Projection</h3>
+                <span class="badge badge-live">XGBoost Ensemble</span>
+              </div>
+              <div class="chart-legend">
+                <span class="legend-item"><span class="line median"></span> Forecast</span>
+                <span class="legend-item"><span class="box ci"></span> 90% Confidence Band</span>
+              </div>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="forecastChart"></canvas>
+            </div>
+            <div class="card-footer-small text-gray">
+              <i data-lucide="trending-up"></i> Quantile regression residual bands plotted. Shaded region represents meteorological uncertainty.
+            </div>
+          </div>
+        </section>
+
+        <!-- SHAP + INTERVENTIONS ROW -->
+        <section class="dashboard-grid-two">
+          <!-- SHAP Card -->
+          <div class="glass-card shap-card">
+            <div class="card-header">
+              <div class="header-left">
+                <h3>Explainable AI (SHAP attributions)</h3>
+                <span class="badge badge-live">TreeExplainer</span>
+              </div>
+              <p class="subtitle" id="shap-subtitle">Feature contribution to current prediction</p>
+            </div>
+            <div class="shap-layout">
+              <div class="shap-chart-wrapper">
+                <canvas id="shapChart"></canvas>
+              </div>
+              <div class="shap-explanation-details">
+                <h4>SHAP Insights</h4>
+                <ul class="shap-list" id="shap-features-list">
+                  <!-- JS populated -->
+                </ul>
+              </div>
+            </div>
+            <div class="card-footer-small text-gray">
+              <i data-lucide="shield-check"></i> Values represent mathematical offset from baseline model E[Y].
+            </div>
+          </div>
+
+          <!-- Intervention Engine -->
+          <div class="glass-card intervention-card" id="intervention-engine-section">
+            <div class="card-header">
+              <div class="header-left">
+                <h3>Intervention Recommendation Engine</h3>
+                <span class="badge badge-live">Priority Scored</span>
+              </div>
+              <span class="badge badge-planned">RL Policy Planned</span>
+            </div>
+
+            <div class="intervention-layout">
+              <div class="interventions-list-panel">
+                <h4>Ranked Administrative Actions</h4>
+                <div class="interventions-list" id="interventions-container">
+                  <!-- JS populated -->
+                </div>
+              </div>
+
+              <div class="combined-impact-panel">
+                <h4>Combined Impact Simulation</h4>
+                <div class="impact-stats-card">
+                  <div class="impact-gauge-row">
+                    <div class="impact-stat">
+                      <span class="stat-lbl">Projected AQI (T+7)</span>
+                      <div class="aqi-projection-comparison">
+                        <span class="old-aqi" id="old-proj-aqi">—</span>
+                        <i data-lucide="chevrons-right"></i>
+                        <span class="new-aqi text-emerald" id="new-proj-aqi">—</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="impact-metrics-grid">
+                    <div class="impact-metric">
+                      <i data-lucide="badge-percent"></i>
+                      <div class="im-text">
+                        <span class="im-val" id="combined-reduction">0%</span>
+                        <span class="im-lbl">AQI Reduction</span>
+                      </div>
+                    </div>
+                    <div class="impact-metric">
+                      <i data-lucide="indian-rupee"></i>
+                      <div class="im-text">
+                        <span class="im-val" id="combined-cost">₹0 Cr</span>
+                        <span class="im-lbl">Implementation Cost</span>
+                      </div>
+                    </div>
+                    <div class="impact-metric">
+                      <i data-lucide="trees"></i>
+                      <div class="im-text">
+                        <span class="im-val" id="combined-co2">0 t</span>
+                        <span class="im-lbl">CO₂ Abated</span>
+                      </div>
+                    </div>
+                    <div class="impact-metric">
+                      <i data-lucide="calendar"></i>
+                      <div class="im-text">
+                        <span class="im-val" id="combined-time">0 Days</span>
+                        <span class="im-lbl">Timeline</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="impact-outcome-box warning" id="impact-outcome-message">
+                    <i data-lucide="alert-triangle"></i>
+                    <span><strong>No Action Taken:</strong> Select interventions above to simulate their combined impact.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer-small text-gray">
+              <i data-lucide="activity"></i> Multi-action simulation uses diminishing returns formulation to prevent double-counting.
+            </div>
+          </div>
+        </section>
+
+        <!-- DIGITAL TWIN SECTION -->
+        <section class="glass-card digital-twin-card">
+          <div class="card-header">
+            <div class="header-left">
+              <h3>Digital Twin Scenario Simulation</h3>
+              <span class="badge badge-live">Parametric Model</span>
+            </div>
+            <span class="badge badge-planned">RL Agent Planned</span>
+          </div>
+
+          <div class="digital-twin-layout">
+            <!-- Sliders -->
+            <div class="sliders-panel">
+              <h4>Simulation Controls</h4>
+
+              <div class="slider-group">
+                <div class="slider-lbl-row">
+                  <label for="slider-traffic">Traffic Congestion Index</label>
+                  <span class="slider-val" id="val-traffic">82%</span>
+                </div>
+                <input type="range" id="slider-traffic" min="0" max="100" value="82" class="twin-slider">
+              </div>
+
+              <div class="slider-group">
+                <div class="slider-lbl-row">
+                  <label for="slider-industrial">Industrial Output Index</label>
+                  <span class="slider-val" id="val-industrial">74%</span>
+                </div>
+                <input type="range" id="slider-industrial" min="0" max="100" value="74" class="twin-slider">
+              </div>
+
+              <div class="slider-group">
+                <div class="slider-lbl-row">
+                  <label for="slider-green">Green Canopy Cover</label>
+                  <span class="slider-val" id="val-green">12%</span>
+                </div>
+                <input type="range" id="slider-green" min="0" max="50" value="12" class="twin-slider">
+              </div>
+
+              <div class="slider-group">
+                <div class="slider-lbl-row">
+                  <label for="slider-wind">Wind Speed (m/s)</label>
+                  <span class="slider-val" id="val-wind">1.2 m/s</span>
+                </div>
+                <input type="range" id="slider-wind" min="0" max="20" value="1.2" step="0.1" class="twin-slider">
+              </div>
+
+              <div class="slider-group">
+                <div class="slider-lbl-row">
+                  <label for="slider-rainfall">Rainfall Accumulation (mm)</label>
+                  <span class="slider-val" id="val-rainfall">0 mm</span>
+                </div>
+                <input type="range" id="slider-rainfall" min="0" max="100" value="0" class="twin-slider">
+              </div>
+
+              <button class="reset-btn" id="reset-sliders-btn">
+                <i data-lucide="rotate-ccw"></i> Reset to Base State
+              </button>
+            </div>
+
+            <!-- Output Panel -->
+            <div class="simulation-outputs-panel">
+              <h4>Simulation Outputs</h4>
+              <div class="simulation-comparison-grid">
+                <div class="sim-out-card aqi-out">
+                  <span class="soc-lbl">SIMULATED AQI</span>
+                  <span class="soc-val text-warning" id="sim-aqi-val">168</span>
+                  <span class="badge badge-warning" id="sim-aqi-status">UNHEALTHY</span>
+                </div>
+                <div class="sim-out-card carbon-out">
+                  <span class="soc-lbl">DAILY CARBON ESTIMATE</span>
+                  <span class="soc-val text-cyan" id="sim-carbon-val">976 t</span>
+                  <span class="soc-sub">CO₂ emissions index</span>
+                </div>
+                <div class="sim-out-card ehi-out">
+                  <span class="soc-lbl">SIMULATED EHI</span>
+                  <span class="soc-val text-red" id="sim-ehi-val">23.0</span>
+                  <span class="badge badge-danger" id="sim-ehi-status">CRITICAL</span>
+                </div>
+                <div class="sim-out-card pop-out">
+                  <span class="soc-lbl">POPULATION AT RISK</span>
+                  <span class="soc-val text-red" id="sim-pop-val">18,360</span>
+                  <span class="soc-sub">Active exposure caseload</span>
+                </div>
+              </div>
+              <div class="simulation-chart-wrap">
+                <canvas id="simulationChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 4. COPILOT CHAT SIDEBAR                    -->
+    <!-- ========================================== -->
+    <div id="copilot-sidebar" class="copilot-sidebar hidden">
+      <div class="copilot-header">
+        <div class="copilot-title">
+          <i data-lucide="bot"></i>
+          <div>
+            <h3>EcoPulse Copilot</h3>
+            <span class="subtitle">Gemini Flash + Local Edge AI</span>
+          </div>
+        </div>
+        <button id="close-copilot-btn" class="close-btn"><i data-lucide="x"></i></button>
+      </div>
+
+      <div class="copilot-body">
+        <div class="chat-history" id="chat-messages">
+          <div class="chat-bubble bot">
+            <p>Hi, I'm the EcoPulse AI Copilot. I can help analyze environmental data, explain predictions, and detail our interventions. Try clicking a sample question below:</p>
+          </div>
+        </div>
+
+        <div class="copilot-presets">
+          <button class="preset-btn-chat">Why is pollution increasing?</button>
+          <button class="preset-btn-chat">What should authorities do this week?</button>
+          <button class="preset-btn-chat">Explain the 7-day confidence interval</button>
+          <button class="preset-btn-chat">Which zone is at highest risk?</button>
+        </div>
+      </div>
+
+      <div class="copilot-footer">
+        <div class="input-row">
+          <input type="text" id="copilot-input" placeholder="Ask EcoPulse Copilot..." autocomplete="off">
+          <button id="send-copilot-btn" class="send-btn"><i data-lucide="send"></i></button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end command-center -->
+
+  <script src="app.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

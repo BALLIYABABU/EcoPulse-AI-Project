@@ -1,0 +1,58 @@
+{
+  "base_value": 142.99807739257812,
+  "prediction": 172.51718139648438,
+  "features": {
+    "temperature": {
+      "shap_value": -1.3358182907104492,
+      "feature_value": 28.5
+    },
+    "humidity": {
+      "shap_value": -0.5448023080825806,
+      "feature_value": 55.0
+    },
+    "wind_speed": {
+      "shap_value": 10.731073379516602,
+      "feature_value": 1.2
+    },
+    "rainfall": {
+      "shap_value": 0.7374704480171204,
+      "feature_value": 0.0
+    },
+    "industrial_emissions": {
+      "shap_value": 13.220869064331055,
+      "feature_value": 0.74
+    },
+    "traffic_density": {
+      "shap_value": 6.034306049346924,
+      "feature_value": 0.82
+    },
+    "vegetation_index": {
+      "shap_value": -3.0398645401000977,
+      "feature_value": 0.12
+    },
+    "aqi_lag_1": {
+      "shap_value": 0.08155003190040588,
+      "feature_value": 154.0
+    },
+    "aqi_lag_7": {
+      "shap_value": 1.0428900718688965,
+      "feature_value": 162.0
+    },
+    "aqi_roll_7": {
+      "shap_value": 2.3736846446990967,
+      "feature_value": 151.28571428571428
+    },
+    "day_of_week": {
+      "shap_value": 0.18579669296741486,
+      "feature_value": 4.0
+    },
+    "month": {
+      "shap_value": 0.009538961574435234,
+      "feature_value": 6.0
+    },
+    "is_holiday": {
+      "shap_value": 0.022374236956238747,
+      "feature_value": 0.0
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_id": "ZONE-A",
+        "name": "Bannerghatta Forest Loss",
+        "description": "Critical loss of green canopy cover due to infrastructural development and peripheral quarrying.",
+        "type": "Forest Loss",
+        "before_ndvi": 0.68,
+        "after_ndvi": 0.42,
+        "change_pct": -38.2,
+        "color": "#FF4444"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.560, 12.780],
+            [77.595, 12.780],
+            [77.595, 12.815],
+            [77.560, 12.815],
+            [77.560, 12.780]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_id": "ZONE-B",
+        "name": "Bellandur Lake Shrinkage",
+        "description": "Reduction in surface water area and massive growth of invasive macrophytes/eutrophication.",
+        "type": "Water Body Shrinkage",
+        "before_ndvi": 0.35,
+        "after_ndvi": 0.12,
+        "change_pct": -65.7,
+        "color": "#FF8800"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.650, 12.920],
+            [77.685, 12.920],
+            [77.685, 12.945],
+            [77.650, 12.945],
+            [77.650, 12.920]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_id": "ZONE-C",
+        "name": "Whitefield Urban Expansion",
+        "description": "Rapid conversion of agricultural and fallow land into high-density IT parks and residential zones (2019 vs 2024).",
+        "type": "Urban Expansion",
+        "before_ndvi": 0.45,
+        "after_ndvi": 0.18,
+        "change_pct": -60.0,
+        "color": "#00D4FF"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.730, 12.950],
+            [77.770, 12.950],
+            [77.770, 12.990],
+            [77.730, 12.990],
+            [77.730, 12.950]
+          ]
+        ]
+      }
+    }
+  ]
+}
